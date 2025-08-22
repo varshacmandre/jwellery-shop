@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pet smart</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background-color: lightcoral;
+      padding:3rem;
+      color: black;
+      text-align: center;
+      font-size: 6rem;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .pet-card {
+      width: 250px;
+      background: lightgrey;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+    }
+    .pet-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+ 
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .back-btn {
+      margin-top: 20px;
+      display: inline-block;
+      background: #ff6f61;
+      color: white;
+      padding: 20px 20px;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+    .details {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>🐾 Pet smart</header>
+<div class="container" id="app"></div>
+
+<script>
+const pets = [
+  {
+    id: 'brownie',
+    name: 'Brownie',
+    age: '2 years',
+    price: '$100',
+    skill: 'Catches frisbees like a pro',
+    charm: 'Wiggles tail when happy',
+    characteristics: 'Friendly, energetic, loyal',
+    health: 'Vaccinated, no medical issues',
+    image: 'https://images.pexels.com/photos/16177024/pexels-photo-16177024.jpeg'
+  },
+  {
+    id: 'goldie',
+    name: 'Goldie',
+    age: '1 year',
+    price: '$120',
+    skill: 'Fetches shoes on command',
+    charm: 'Golden shiny fur',
+    characteristics: 'Playful, loving, smart',
+    health: 'Healthy and fit',
+    image: 'https://images.pexels.com/photos/17575407/pexels-photo-17575407.jpeg'
+  },
+  {
+    id: 'hazel',
+    name: 'Hazel',
+    age: '1 years',
+    price: '$190',
+    skill: 'Great with kids',
+    charm: 'Sparkling eyes',
+    characteristics: 'Gentle, patient, cuddly',
+    health: 'Fully vaccinated',
+    image: 'https://images.pexels.com/photos/18664154/pexels-photo-18664154.jpeg'
+  },
+  {
+    id: 'motomoto',
+    name: 'MotoMoto',
+    age: '5 months',
+    price: '$200',
+    skill: 'Hippo dance master',
+    charm: 'Big and huggable',
+    characteristics: 'Lazy, charming, food lover',
+    health: 'Great condition',
+    image: 'https://media.istockphoto.com/id/2175621091/photo/a-female-dwarf-hippopotamus-named-moo-deng-in-open-zoo-in-chonburi-thailand.jpg?s=1024x1024&w=is&k=20&c=GJkJVfXjtfjW8sfwvR6-TyWR2jEPeOFpNLPXRkz8KuQ='
+  },
+  {
+    id: 'bilbil',
+    name: 'Bilbil',
+    age: '2 years',
+    price: '$85',
+    skill: 'purrs on command',
+    charm: 'Little legs, big attitude',
+    characteristics: 'Bold, adventurous',
+    health: 'All shots up to date',
+    image: 'https://images.pexels.com/photos/22756529/pexels-photo-22756529.jpeg'
+  },
+  {
+    id: 'chimpu',
+    name: 'Chimpu',
+    age: '6 months',
+    price: '$70',
+    skill: 'Swings from trees',
+    charm: 'Mischievous smile',
+    characteristics: 'Playful, cheeky',
+    health: 'Good overall health',
+    image: 'https://images.pexels.com/photos/14818900/pexels-photo-14818900.jpeg'
+  },
+  {
+    id: 'elliphelli',
+    name: 'Elliphelli',
+    age: '2 months',
+    price: '$150',
+    skill: 'Sprays water for fun',
+    charm: 'Big ears flapping',
+    characteristics: 'Gentle, strong',
+    health: 'Excellent',
+    image: 'https://images.pexels.com/photos/20729854/pexels-photo-20729854.jpeg'
+  },
+  {
+    id: 'bubble',
+    name: 'Bubble',
+    age: '1.5 years',
+    price: '$45',
+    skill: 'Blows bubbles (somehow)',
+    charm: 'Bubbly personality',
+    characteristics: 'Happy, curious',
+    health: 'Perfect health',
+    image:'https://images.pexels.com/photos/1145274/pexels-photo-1145274.jpeg'
+  },
+  {
+    id: 'otto',
+    name: 'Otto',
+    age: '1 year',
+    price: '$105',
+    skill: 'Inks enemies',
+    charm: '8-armed hugs',
+    characteristics: 'Shy, smart',
+    health: 'Healthy',
+    image: 'https://images.pexels.com/photos/28749526/pexels-photo-28749526.jpeg'
+  },
+  {
+    id: 'furry',
+    name: 'Furry',
+    age: '3 years',
+    price: '$110',
+    skill: 'Purrs like an engine',
+    charm: 'Fluffy beyond belief',
+    characteristics: 'Cuddly, lazy',
+    health: 'Clean and healthy',
+    image: 'https://images.pexels.com/photos/33514653/pexels-photo-33514653.jpeg'
+  },
+  {
+    id: 'hamham',
+    name: 'Hamham',
+    age: '0.5 years',
+    price: '$95',
+    skill: 'Runs in wheel forever',
+    charm: 'Tiny squeaks',
+    characteristics: 'Energetic, tiny',
+    health: 'Great health',
+    image: 'https://images.pexels.com/photos/4520484/pexels-photo-4520484.jpeg'
+  },
+  {
+    id: 'giffy',
+    name: 'Giffy',
+    age: '4 years',
+    price: '$130',
+    skill: 'Neck dances',
+    charm: 'Tallest friend you will ever have',
+    characteristics: 'Calm, majestic',
+    health: 'Healthy',
+    image: 'https://images.pexels.com/photos/9797283/pexels-photo-9797283.jpeg'
+  }
+];
+
+let favorites = [];
+
+function renderHome() {
+  const app = document.getElementById('app');
+  app.innerHTML = '<h2>Select a Pet for Adoption</h2><div class="grid">' + 
+    pets.map(pet => `
+      <div class="pet-card">
+        <img src="${pet.image}" alt="${pet.name}">
+        <h3>${pet.name}</h3>
+        <p>Price: ${pet.price}</p>
+        <p>Charm: ${pet.charm}</p>
+        <br>
+        <a class="back-btn" onclick="showDetails('${pet.id}')">More Info</a>
+      </div>
+    `).join('') + '</div>';
+}
+
+function showDetails(petId) {
+  const pet = pets.find(p => p.id === petId);
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="details">
+      <h2>${pet.name}</h2>
+      <img src="${pet.image}" alt="${pet.name}" style="width: 300px; border-radius: 10px;">
+      <p><strong>Age:</strong> ${pet.age}</p>
+      <p><strong>Price:</strong> ${pet.price}</p>
+      <p><strong>Skill:</strong> ${pet.skill}</p>
+      <p><strong>Characteristics:</strong> ${pet.characteristics}</p>
+      <p><strong>Medical Health:</strong> ${pet.health}</p>
+      <br><br>
+      <a class="back-btn" onclick="renderHome()">← Back to Home</a>
+    </div>
+  `;
+}
+
+function toggleFavorite(petId) {
+  if (favorites.includes(petId)) {
+    favorites = favorites.filter(id => id !== petId);
+  } else {
+    favorites.push(petId);
+  }
+  renderHome();
+}
+
+renderHome();
+</script>
+
+</body>
+</html>
